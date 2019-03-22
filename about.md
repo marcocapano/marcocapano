@@ -4,15 +4,22 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Hi, it's Marco!👨🏻‍💻 I live in London, where I work as an iOS Engineer [@Peak](http://www.peak.net) 🧠.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+I build iOS apps 🍎, contribute to open source and study Computer Engineering. I became an iOS Developer in 2016 studying at the Apple Developer Academy in Italy.
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+I love basketball 🏀, books 📚, TV series 📺 , tech 💻 and contributing to open source.
 
+I like what I do and enjoy spending time outside of work to learn new things and get better, which is the reason why I also started publishing articles on this website. 
 
-[jekyll-organization]: https://github.com/jekyll
+[⬇️📃 Download my cv](/cv_marcocapano.pdf)
+
+## Get in touch!
+
+Email: [marco24capano@icloud.com](mailto:marco24capano@icloud.com)
+
+GitHub: [@marcocapano](https://github.com/marcocapano)
+
+Twitter: [@marcocapano1](https://twitter.com/marcocapano1)
+
+Linkedin: [@marcocapano](https://www.linkedin.com/in/marcocapano/)
