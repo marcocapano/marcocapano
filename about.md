@@ -10,7 +10,8 @@ I build iOS apps 🍎, contribute to open source and study Computer Engineering.
 
 I love basketball 🏀, books 📚, TV series 📺 , tech 💻 and contributing to open source.
 
-I like what I do and enjoy spending time outside of work to learn new things and get better, which is the reason why I also started publishing articles on this website. 
+I like what I do and enjoy learning new things in my spare time, which is the reason why I also started publishing articles on this website.
+Writing for me is a way to document my learnings and to make concepts stick into my mind. 
 
 [⬇️📃 Download my cv](/cv_marcocapano.pdf)
 
