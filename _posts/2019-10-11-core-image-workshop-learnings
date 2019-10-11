@@ -66,7 +66,7 @@ But there is many many options to get stuff like hairs, teeth, skin etc. Some mo
 
 Last but not least, apparently you can use your own metal logic instead of using built in filters.
 
-One example of a Metal kernel is `CIBlendKernel` whose Metal function is a function that gets called once per pixel with the foreground and background images as inputs and the pixel to use in the result image as output.
+One example of a Metal kernel is `CIBlendKernel` whose Metal function is a function that gets called once per pixel and has the foreground and background images as inputs and the pixel to use in the result image as output.
 
 Colors are of `float4` type (or the type alias `sample_t`), which is a vector that has red, green, blue and alpha as values.
 
