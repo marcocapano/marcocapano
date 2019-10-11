@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Calling a function n times with the result of each call
+title: Composing a function n times with itself
 categories:  [Swift]
 tags:  [Swift]
 ---
