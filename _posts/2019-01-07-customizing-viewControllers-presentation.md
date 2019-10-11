@@ -5,8 +5,6 @@ categories:  [iOS]
 tags:  [Swift, iOS, UI]
 ---
 
-<link rel="stylesheet" href="/sundellsColors.css">
-
 Most of the screen transitions that happen in our apps falls into this categories:
 - modal presentations
 - push/pop on a navigation stack
@@ -30,40 +28,38 @@ So we have a few points where we can operate and change both the animation and p
 
 Let’s say we were to upload a file to our servers and we wanted to notify the user once the operation is completed:
 
-<pre class="splash"><code>
-swift
-<span class="keyword">func</span> upload(file: <span class="type">File</span>, using uploader: <span class="type">FileUploader</span>) {
-    uploader.<span class="call">send</span>(file, then: {
-        <span class="keyword">let</span> banner = <span class="type">Banner</span>(message: <span class="string">"File successfully uploaded ✅"</span>)
-        <span class="keyword">self</span>.<span class="call">present</span>(banner, animated: <span class="keyword">true</span>)
+```swift
+func upload(file: File, using uploader: FileUploader) {
+    uploader.send(file, then: {
+        let banner = Banner(message: "File successfully uploaded ✅")
+        self.present(banner, animated:true)
     })
 }
-</code></pre>
+```
 
 Now this would present our banner full-screen modally, but we might want to make it look like a banner on the bottom of the screen, so that it is less invasive.
 We’ll focus on a custom presentation, while using the default transition from the bottom.
 
 First thing, let’s create our custom presentation controller:
 
-<pre class="splash"><code>
-swift
-<span class="keyword">class</span> BannerPresentationController: <span class="type">UIPresentationController</span> {
+```swift
+class BannerPresentationController: UIPresentationController {
   
-    <span class="keyword">override var</span> frameOfPresentedViewInContainerView: <span class="type">CGRect</span> {
-        <span class="comment">//here we should compute the frame for the presented banner</span>
+    override var frameOfPresentedViewInContainerView: CGRect {
+        //here we should compute the frame for the presented banner
     }
     
-    <span class="keyword">override func</span> containerViewDidLayoutSubviews() {
-        <span class="keyword">super</span>.<span class="call">containerViewDidLayoutSubviews</span>()
-        presentedView?.<span class="property">frame</span> = frameOfPresentedViewInContainerView
+    override func containerViewDidLayoutSubviews() {
+        super.containerViewDidLayoutSubviews()
+        presentedView?.frame = frameOfPresentedViewInContainerView
     }
     
-    <span class="keyword">override func</span> presentationTransitionWillBegin() {
-        <span class="keyword">super</span>.<span class="call">presentationTransitionWillBegin</span>()
-        presentedView?.<span class="property">layer</span>.<span class="property">cornerRadius</span> = <span class="number">12</span>
+    override func presentationTransitionWillBegin() {
+        super.presentationTransitionWillBegin()
+        presentedView?.layer.cornerRadius = 12
     }
 }
-</code></pre>
+```
 
 The key here is the `frameOfPresentedViewInContainerView` property, which we’ll use to calculate the appropriate size for the banner.
 
@@ -73,45 +69,42 @@ The tool for the job is the `UIView.systemLayoutSizeFitting`
 
 Our implementation should look something like this:
 
-<pre class="splash"><code>
-swift
-<span class="keyword">override var</span> frameOfPresentedViewInContainerView: <span class="type">CGRect</span> {
+```swift
+override var frameOfPresentedViewInContainerView: CGRect {
         
-        <span class="keyword">let</span> safeBounds = containerView.<span class="property">bounds</span>.<span class="call">inset</span>(by: containerView.<span class="property">safeAreaInsets</span>)
-        <span class="keyword">let</span> inset: <span class="type">CGFloat</span> = <span class="number">16</span>
+        let safeBounds = containerView.bounds.inset(by: containerView.safeAreaInsets)
+        let inset: CGFloat = 16
         
-        <span class="keyword">let</span> targetWidth = safeBounds.<span class="property">width</span> - <span class="number">2</span>*<span class="number">16</span>
-        <span class="keyword">let</span> targetSize = <span class="type">CGSize</span>(
+        let targetWidth = safeBounds.width - 2*16
+        let targetSize = CGSize(
             width: targetWidth,
-            height: <span class="type">UIView</span>.<span class="property">layoutFittingCompressedSize</span>.<span class="property">height</span>
+            height: UIView.layoutFittingCompressedSize.height
         )
-        <span class="keyword">let</span> targetHeight = presentedView.<span class="call">systemLayoutSizeFitting</span>(targetSize, withHorizontalFittingPriority: .<span class="dotAccess">required</span>, verticalFittingPriority: .<span class="dotAccess">defaultLow</span>).<span class="property">height</span>
+        let targetHeight = presentedView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow).height
         
-        <span class="keyword">return</span> <span class="type">CGRect</span>(x: inset, y: yPosition, width: targetWidth, height: targetHeight)
+        return CGRect(x: inset, y: yPosition, width: targetWidth, height: targetHeight)
 }
-</code></pre>
+```
 
 ## Putting the pieces together
 
 Now all we need to do is to assign out brand new `BannerPresentationController` as the presentation controller for our `Banner`:
-<pre class="splash"><code>
-swift
-<span class="keyword">extension</span> <span class="type">Banner</span>: <span class="type">UIViewControllerTransitioningDelegate</span> {
-	<span class="keyword">func</span> presentationController(forPresented presented: <span class="type">UIViewController</span>, presenting: <span class="type">UIViewController</span>?, source: <span class="type">UIViewController</span>) -&gt; <span class="type">UIPresentationController</span>? {
-        <span class="keyword">return</span> <span class="type">BannerPresentationController</span>(presentedViewController: presented, presenting: presenting)
+
+```swift
+extension Banner: UIViewControllerTransitioningDelegate {
+	func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -&gt; UIPresentationController? {
+        return BannerPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
 
-<span class="comment">//when presenting the banner</span>
-banner.<span class="property">transitioningDelegate</span> = banner
-</code></pre>
+//when presenting the banner
+banner.transitioningDelegate = banner
+```
 
 And specify a custom presentation style:
-<pre class="splash"><code>
-swift
-banner.<span class="property">modalPresentationStyle</span> = .<span class="dotAccess">custom</span>
-</code></pre>
-
+```swift
+banner.modalPresentationStyle = .custom
+```
 And the result will be this:
 
 ![](/img/banner.gif)
@@ -121,5 +114,5 @@ And the result will be this:
 Despite being very far from the latest trends in UI development like reactive concepts, UIKit has shown that it is a powerful framework with multiple customization points.
 There’s a lot more that can be done, like changing the presentation animations and timing, but we’ll save it for a future article. 
 
-Hope you liked this little experiment 😊 and if you did, check my website: [http://marcocapano.vapor.cloud/](http://marcocapano.vapor.cloud/)
+Hope you liked this little experiment 😊
 
