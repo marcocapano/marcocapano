@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Learnings from CoreImage workshop at PragmaConf2019
+title: Learnings from Core Image workshop at PragmaConf2019
 categories:  [iOS]
 tags:  [Swift, iOS, CoreImage]
 ---
