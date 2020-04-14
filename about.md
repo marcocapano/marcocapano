@@ -4,6 +4,10 @@ title: About
 permalink: /about/
 ---
 
+<center style="margin: auto; width: 150px; height: 150px; overflow: hidden; border-radius: 50%;">
+    <img src="/img/marco.jpg" />
+</center>
+
 Hi, it's Marco!👨🏻‍💻 I live in London, where I work as an iOS Engineer [@Peak](http://www.peak.net) 🧠.
 
 I build iOS apps 🍎, contribute to open source and study Computer Engineering on the weekends. I became an iOS Engineer in 2016 studying at the Apple Developer Academy in Italy.
