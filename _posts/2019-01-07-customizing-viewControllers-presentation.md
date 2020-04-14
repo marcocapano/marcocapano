@@ -112,7 +112,6 @@ And the result will be this:
 ## Conclusion
 
 Despite being very far from the latest trends in UI development like reactive concepts, UIKit has shown that it is a powerful framework with multiple customization points.
-There’s a lot more that can be done, like changing the presentation animations and timing, but we’ll save it for a future article. 
 
 Hope you liked this little experiment 😊
 

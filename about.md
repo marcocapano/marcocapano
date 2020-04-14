@@ -4,9 +4,11 @@ title: About
 permalink: /about/
 ---
 
-<center style="margin: auto; width: 150px; height: 150px; overflow: hidden; border-radius: 50%;">
-    <img src="/img/marco.jpg" />
-</center>
+<p>
+    <center style="margin: auto; width: 150px; height: 150px; overflow: hidden; border-radius: 50%;">
+        <img src="/img/marco.jpg" />
+    </center>
+</p>
 
 Hi, it's Marco!👨🏻‍💻 I live in London, where I work as an iOS Engineer [@Peak](http://www.peak.net) 🧠.
 

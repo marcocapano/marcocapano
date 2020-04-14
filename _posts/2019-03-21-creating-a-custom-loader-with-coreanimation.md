@@ -138,4 +138,4 @@ vc.add(loader, containerView: vc.view.button)
 
 # Conclusion
 
-As we’ve seen, CoreAnimation is a really powerful job and makes our job really easy. Hope you enjoyed this post!
+As we’ve seen, CoreAnimation is a really powerful tool and makes our job really easy. Hope you enjoyed this post!
