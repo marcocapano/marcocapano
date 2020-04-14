@@ -18,7 +18,7 @@ While Core Image is a pretty old frameworks whose APIs were initially all string
 
 Originally I would create and configure a `CIFilter` like this:
 
-```swift
+```
 import CoreImage
 
 let filter = CIFilter(name: "CIPhotoEffectNoir")
@@ -31,7 +31,7 @@ Additionally, it forces us to deal with an optional `CIFilter?` even though we *
 
 The trick is adding a new import statement:
 
-```swift
+```
 import CoreImage
 import CoreImage.CIFilterBuiltins
 
@@ -51,7 +51,7 @@ Core Image has an initialiser for a `CIImage` that takes a dictionary `[CIImageO
 
 Here is an example of using an option to get the silhouette of a portrait:
 
-```swift
+```
 let options: [CIImageOption: Any] = [
     .auxiliaryPortraitEffectsMatte: true
 ]

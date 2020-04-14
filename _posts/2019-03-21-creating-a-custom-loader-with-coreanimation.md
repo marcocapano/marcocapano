@@ -22,14 +22,14 @@ What does this mean? It means, given a sublayer, this replicator layer can insta
 
 Now that we now what tool to use, let’s start actually *making* our loading spinner. We’ll start from our `CAReplicatorLayer`:
 
-```swift
+```
 let replicatorLayer = CAReplicatorLayer()
 view.layer.addSublayer(replicatorLayer)
 ```
 
 Then, we’ll center our layer into a view:
 
-```swift
+```
 let size: CGFloat = 100
 let viewFrame = view.frame
 
@@ -42,7 +42,7 @@ replicatorLayer.frame = CGRect(
 
 Now we need to give the replicator layer a sublayer to replicate, so let’s go ahead and create a circle layer:
 
-```swift
+```
 let circle = CALayer()
 circle.backgroundColor = UIColor.blue.cgColor
 circle.cornerRadius = 2.5
@@ -59,7 +59,7 @@ At this point, our replicator knows which sublayer has to be replicated, what is
 
 Let’s set this properties to achieve the behaviour we want:
 
-```swift
+```
 let instanceCount = 20
 replicatorLayer.instanceCount = instanceCount
 replicatorLayer.instanceDelay = 1/CFTimeInterval(instanceCount)
@@ -74,7 +74,7 @@ So far our loading spinner looks good, but running the code will reveal that it 
 
 Adding an animation is as simple as creating an instance of `CABasicAnimation`:
 
-```swift
+```
 let fadingAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
 fadingAnimation.fromValue = 1
 fadingAnimation.toValue = 0
@@ -101,7 +101,7 @@ We’ll then just need to add/remove this view controller as a child view contro
 
 To make working with child view controllers easier, let’s add a few extensions on `UIViewController` :
 
-```swift
+```
 func addChildViewController(_ child: UIViewController, toContainerView containerView: UIView) {
     addChild(child)
     containerView.addSubview(child.view)
@@ -119,7 +119,7 @@ func removeViewAndControllerFromParentViewController() {
 
 So now, adding and removing a loader is as easy as:
 
-```swift
+```
 let loader = LoadingViewController()
 vc.add(loader) //Showing loader
 
@@ -131,7 +131,7 @@ WebService().makeCall(then: { results
 
 This approach gives us the ability to show the loader however we want, full screen, half screen or even on top of one button (UIBarButton maybe):
 
-```swift
+```
 vc.add(loader, containerView: vc.view.button)
 ```
 

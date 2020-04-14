@@ -11,7 +11,7 @@ Today I faced this question from a tweet by [Sash Zats](https://twitter.com/zats
 
 Sure, assuming we want to call a function 5 times, one might just do this:
 
-```swift
+```
 ///Adds 5 to a number
 func addFive(to number: Int) -> Int {
     return number + 5
@@ -33,7 +33,7 @@ Turns out, the Standard Library has a function called `sequence(first:next:)` th
  
 For completeness, here’s the entire function signature:
 
-```swift
+```
 /// - Parameter first: The first element to be returned from the sequence.
 /// - Parameter next: A closure that accepts the previous sequence element and
 ///   returns the next element.
@@ -46,7 +46,7 @@ But we need something more right?  We need to control the number of times the fu
 
 So I went one step further and wrote this little function that does just what we need:
 
-```swift
+```
 /// Calls a function n times passing the result of each call into the next call.
 func call<T>(_ function: @escaping (T) -> T?, initialInput: T, repetitions: Int) -> T? {
     var seq = sequence(first: initialInput, next: function)
@@ -68,7 +68,7 @@ Please note that we call `next()` *n+1 times* because otherwise the first call w
 
 We’ve seen how very little bit of work and some help from the Standard Library can make our life easier. Let’s see the final result!
 
-```swift
+```
 //Before
 let manualResult = addFive(to: addFive(to: addFive(to: addFive(to: addFive(to: 2)))))
 
