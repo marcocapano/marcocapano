@@ -20,6 +20,11 @@ Currently focusing on learning more about testing, threading and functional prog
 In my future I'd like to release an open source app and learn more about programming languages and graphics programming.
 
 
+#### Experience
+Now working at Peak, where we build a Brain Training Game selected within Best Apps of The Year by Apple in 2014. *(April 2019 - now)*
+
+Previously worked for the apps agency [Pushapp](www.pushapp.me) where I worked on multiple projects, both in Swift and Objective-C. *(November 2017 - April 2019)*
+
 [⬇️📃 Download my cv](/cv_marcocapano.pdf)
 
 ## Get in touch!

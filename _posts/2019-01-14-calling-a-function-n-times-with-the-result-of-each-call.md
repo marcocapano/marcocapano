@@ -11,7 +11,7 @@ Today I faced this question from a tweet by [Sash Zats](https://twitter.com/zats
 
 Sure, assuming we want to call a function 5 times, one might just do this:
 
-```
+{% highlight swift %}
 ///Adds 5 to a number
 func addFive(to number: Int) -> Int {
     return number + 5
@@ -19,7 +19,7 @@ func addFive(to number: Int) -> Int {
 
 let result = addFive(to: addFive(to: addFive(to: addFive(to: addFive(to: 2)))))
 print(result) //27
-```
+{% endhighlight %}
 
 But is that what we *really* want to write?
 
@@ -33,20 +33,20 @@ Turns out, the Standard Library has a function called `sequence(first:next:)` th
  
 For completeness, here’s the entire function signature:
 
-```
+{% highlight swift %}
 /// - Parameter first: The first element to be returned from the sequence.
 /// - Parameter next: A closure that accepts the previous sequence element and
 ///   returns the next element.
 /// - Returns: A sequence that starts with `first` and continues with every
 ///   value returned by passing the previous element to `next`.
 public func sequence<T>(first: T, next: @escaping (T) -> T?) -> UnfoldFirstSequence<T>
-```
+{% endhighlight %}
 
 But we need something more right?  We need to control the number of times the function needs to be called. We don’t want to clutter the call site with a bunch of calls to `next()`.
 
 So I went one step further and wrote this little function that does just what we need:
 
-```
+{% highlight swift %}
 /// Calls a function n times passing the result of each call into the next call.
 func call<T>(_ function: @escaping (T) -> T?, initialInput: T, repetitions: Int) -> T? {
     var seq = sequence(first: initialInput, next: function)
@@ -60,7 +60,7 @@ func call<T>(_ function: @escaping (T) -> T?, initialInput: T, repetitions: Int)
     
     return result
 }
-```
+{% endhighlight %}
 
 Please note that we call `next()` *n+1 times* because otherwise the first call would result in the initial input being the output. 
 
@@ -68,13 +68,13 @@ Please note that we call `next()` *n+1 times* because otherwise the first call w
 
 We’ve seen how very little bit of work and some help from the Standard Library can make our life easier. Let’s see the final result!
 
-```
+{% highlight swift %}
 //Before
 let manualResult = addFive(to: addFive(to: addFive(to: addFive(to: addFive(to: 2)))))
 
 //After
 let functionResult = call(addFive(to:), initialInput: 2, repetitions: 5)
-```
+{% endhighlight %}
 
 You can find the complete code in this [gist](https://gist.github.com/marcocapano/5f80311fb843d5b0c5148c790b8d346e).
 

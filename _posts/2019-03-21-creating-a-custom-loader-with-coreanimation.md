@@ -22,14 +22,14 @@ What does this mean? It means, given a sublayer, this replicator layer can insta
 
 Now that we now what tool to use, let’s start actually *making* our loading spinner. We’ll start from our `CAReplicatorLayer`:
 
-```
+{% highlight swift %}
 let replicatorLayer = CAReplicatorLayer()
 view.layer.addSublayer(replicatorLayer)
-```
+{% endhighlight %}
 
 Then, we’ll center our layer into a view:
 
-```
+{% highlight swift %}
 let size: CGFloat = 100
 let viewFrame = view.frame
 
@@ -38,11 +38,12 @@ replicatorLayer.frame = CGRect(
     y: viewFrame.midY - size/2,
     width: size, height: size
 )
-```
+{% endhighlight %}
+
 
 Now we need to give the replicator layer a sublayer to replicate, so let’s go ahead and create a circle layer:
 
-```
+{% highlight swift %}
 let circle = CALayer()
 circle.backgroundColor = UIColor.blue.cgColor
 circle.cornerRadius = 2.5
@@ -50,7 +51,8 @@ circle.frame.size = CGSize(width: 5, height: 5)
 
 //It DOES need to be added as a sublayer to the replicator
 replicatorLayer.addSublayer(circle)
-```
+{% endhighlight %}
+
 
 At this point, our replicator knows which sublayer has to be replicated, what is left for us is to tell him *how* to do it, through three properties: 
 - `istanceCount`, which defines the number of copies;
@@ -59,14 +61,15 @@ At this point, our replicator knows which sublayer has to be replicated, what is
 
 Let’s set this properties to achieve the behaviour we want:
 
-```
+{% highlight swift %}
 let instanceCount = 20
 replicatorLayer.instanceCount = instanceCount
 replicatorLayer.instanceDelay = 1/CFTimeInterval(instanceCount)
 
 let angle = -CGFloat.pi * 2 / CGFloat(instanceCount)
 replicatorLayer.instanceTransform = CATransform3DMakeRotation(angle, 0, 0, 1)
-```
+{% endhighlight %}
+
 
 ## Adding an animation
 
@@ -74,7 +77,7 @@ So far our loading spinner looks good, but running the code will reveal that it 
 
 Adding an animation is as simple as creating an instance of `CABasicAnimation`:
 
-```
+{% highlight swift %}
 let fadingAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
 fadingAnimation.fromValue = 1
 fadingAnimation.toValue = 0
@@ -84,7 +87,8 @@ fadingAnimation.repeatCount = Float.greatestFiniteMagnitude
 //Then we simply add the animation to the layer.
 //the 'key' parameter is a unique string key we can assign to reference the animation later.
 circle.add(fadingAnimation, forKey: nil)
-```
+{% endhighlight %}
+
 
 The result?
 
@@ -101,7 +105,7 @@ We’ll then just need to add/remove this view controller as a child view contro
 
 To make working with child view controllers easier, let’s add a few extensions on `UIViewController` :
 
-```
+{% highlight swift %}
 func addChildViewController(_ child: UIViewController, toContainerView containerView: UIView) {
     addChild(child)
     containerView.addSubview(child.view)
@@ -115,11 +119,12 @@ func removeViewAndControllerFromParentViewController() {
     removeFromParent()
     view.removeFromSuperview()
 }
-```
+{% endhighlight %}
+
 
 So now, adding and removing a loader is as easy as:
 
-```
+{% highlight swift %}
 let loader = LoadingViewController()
 vc.add(loader) //Showing loader
 
@@ -127,13 +132,15 @@ WebService().makeCall(then: { results
 	vc.show(results)
 	loader.remove() //Removing the loader
 })
-```
+{% endhighlight %}
+
 
 This approach gives us the ability to show the loader however we want, full screen, half screen or even on top of one button (UIBarButton maybe):
 
-```
+{% highlight swift %}
 vc.add(loader, containerView: vc.view.button)
-```
+{% endhighlight %}
+
 
 
 # Conclusion

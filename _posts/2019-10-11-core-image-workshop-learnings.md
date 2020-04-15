@@ -18,27 +18,29 @@ While Core Image is a pretty old frameworks whose APIs were initially all string
 
 Originally I would create and configure a `CIFilter` like this:
 
-```
+{% highlight swift %}
+
 import CoreImage
 
 let filter = CIFilter(name: "CIPhotoEffectNoir")
 filter?.setValue(myImage, forKey: "inputImage")
 let result = filter?.outputImage
-``` 
+{% endhighlight  %} 
 
 Now, this code works, but it uses strings to both create and configure the filter.
 Additionally, it forces us to deal with an optional `CIFilter?` even though we *know* the filter is exists.
 
 The trick is adding a new import statement:
 
-```
+{% highlight swift %}
+
 import CoreImage
 import CoreImage.CIFilterBuiltins
 
 let filter = CIFilter.gaussianBlur()
 filter.inputImage = myImage
 let result = filter.outputImage
-```
+{% endhighlight  %}
 
 This results in great improvements, as we can now
 - rely on auto completion to find available filter names
@@ -51,14 +53,15 @@ Core Image has an initialiser for a `CIImage` that takes a dictionary `[CIImageO
 
 Here is an example of using an option to get the silhouette of a portrait:
 
-```
+{% highlight swift %}
+
 let options: [CIImageOption: Any] = [
     .auxiliaryPortraitEffectsMatte: true
 ]
 
 let ciimage = CIImage(image: myImage, options: options)
 
-```
+{% endhighlight  %}
 
 But there is many many options to get stuff like hairs, teeth, skin etc. Some more documented, some...😅
 

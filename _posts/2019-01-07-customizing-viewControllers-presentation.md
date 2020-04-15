@@ -28,21 +28,21 @@ So we have a few points where we can operate and change both the animation and p
 
 Let’s say we were to upload a file to our servers and we wanted to notify the user once the operation is completed:
 
-```swift
+{% highlight swift %}
 func upload(file: File, using uploader: FileUploader) {
     uploader.send(file, then: {
         let banner = Banner(message: "File successfully uploaded ✅")
         self.present(banner, animated:true)
     })
 }
-```
+{% endhighlight %}
 
 Now this would present our banner full-screen modally, but we might want to make it look like a banner on the bottom of the screen, so that it is less invasive.
 We’ll focus on a custom presentation, while using the default transition from the bottom.
 
 First thing, let’s create our custom presentation controller:
 
-```swift
+{% highlight swift %}
 class BannerPresentationController: UIPresentationController {
   
     override var frameOfPresentedViewInContainerView: CGRect {
@@ -59,7 +59,7 @@ class BannerPresentationController: UIPresentationController {
         presentedView?.layer.cornerRadius = 12
     }
 }
-```
+{% endhighlight %}
 
 The key here is the `frameOfPresentedViewInContainerView` property, which we’ll use to calculate the appropriate size for the banner.
 
@@ -69,7 +69,7 @@ The tool for the job is the `UIView.systemLayoutSizeFitting`
 
 Our implementation should look something like this:
 
-```swift
+{% highlight swift %}
 override var frameOfPresentedViewInContainerView: CGRect {
         
         let safeBounds = containerView.bounds.inset(by: containerView.safeAreaInsets)
@@ -84,27 +84,29 @@ override var frameOfPresentedViewInContainerView: CGRect {
         
         return CGRect(x: inset, y: yPosition, width: targetWidth, height: targetHeight)
 }
-```
+{% endhighlight %}
 
 ## Putting the pieces together
 
 Now all we need to do is to assign out brand new `BannerPresentationController` as the presentation controller for our `Banner`:
 
-```swift
+{% highlight swift %}
 extension Banner: UIViewControllerTransitioningDelegate {
 	func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -&gt; UIPresentationController? {
         return BannerPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
+{% endhighlight %}
 
 //when presenting the banner
+{% highlight swift %}
 banner.transitioningDelegate = banner
-```
+{% endhighlight %}
 
 And specify a custom presentation style:
-```swift
+{% highlight swift %}
 banner.modalPresentationStyle = .custom
-```
+{% endhighlight %}
 And the result will be this:
 
 ![](/img/banner.gif)
@@ -115,3 +117,4 @@ Despite being very far from the latest trends in UI development like reactive co
 
 Hope you liked this little experiment 😊
 
+endhighlight
