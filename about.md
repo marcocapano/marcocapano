@@ -10,7 +10,7 @@ permalink: /about/
     </center>
 </p>
 
-Hi, it's Marco!👨🏻‍💻 I live in London, where I work as an iOS Engineer [@Peak](http://www.peak.net) 🧠.
+Hi, it's Marco!👨🏻‍💻 I live in London, where I work as an iOS Engineer [@Peak](http://www.peak.net) 🧠 and co-organise [NSLondon](http://twitter.com/nslondonmeetup).
 
 I build iOS apps 🍎, contribute to open source and study Computer Engineering on the weekends. I became an iOS Engineer in 2016 studying at the Apple Developer Academy in Italy.
 
